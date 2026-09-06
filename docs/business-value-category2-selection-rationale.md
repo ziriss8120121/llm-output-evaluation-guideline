@@ -188,27 +188,21 @@ LLM機能が生成した**出力内容そのものから、機能の目的・要
 
 | 候補 | 今回の扱い | 理由 / 対応先 |
 |---|---|---|
-| 目的・タスク適合 | **採用 / 統合** | Task Completion / Functional Appropriatenessを「目的・タスク適合」として採用。LLM機能固有の目的・期待価値への適合を扱う |
-| 目的・タスク適合 | **採用 / 統合** | Helpfulnessは単独区分にすると完全性・関連性・指示遵守等を包含しすぎるため、「目的・タスク適合」の考え方へ統合 |
-| 完全性 | **採用** | Completeness / Response Completenessに対応。必要な情報・要素・論点が不足していないかを扱う |
-| 関連性 | **採用** | Relevance / Answer Relevancyに対応。要求と関係のない情報に逸れていないかを扱う |
+| 目的・タスク適合 | **採用 / 統合** | Task Completion / Functional Appropriateness / Helpfulnessを統合。LLM機能固有の目的・期待価値への適合を扱う |
+| 完全性 | **採用** | Completeness / Response Completeness / Functional Completenessに対応。必要な情報・要素・論点が不足していないかを扱う |
+| 正確性 | **ビジネス価値から除外** | Correctness / Accuracy / Functional Correctnessに対応。固定済み事業リスク「誤情報・誤誘導」で評価するため。二重評価防止 |
+| 関連性 | **採用** | Relevance / Answer Relevancy / Response Relevancyに対応。要求と関係のない情報に逸れていないかを扱う |
 | 指示遵守 | **採用** | Following Instructions / Instruction Followingに対応。プロンプトで明示した条件・形式・制約等を扱う |
-| 論理的一貫性 | **採用 / 統合** | Coherenceに対応。「表現品質」の下位観点として扱う |
+| 根拠への忠実性 | **ビジネス価値から除外** | Faithfulness / Groundednessに対応。入力・参照情報にない内容や根拠との不整合は「誤情報・誤誘導」で評価するため |
+| 論理的一貫性 | **採用 / 統合** | Logical Coherence / Coherenceに対応。「表現品質」の下位観点として扱う |
 | 自然さ・流暢性 | **採用 / 統合** | Fluencyに対応。「表現品質」の下位観点として扱う |
-| スタイル・トーン | **採用 / 統合** | 「表現品質」の下位観点として扱う |
-| 簡潔性・冗長性 | **採用 / 統合** | Verbosity等に対応。「表現品質」の下位観点として扱う |
-| 正確性 | **ビジネス価値から除外** | Correctness / Accuracyに対応。固定済み事業リスク「誤情報・誤誘導」で評価するため。二重評価防止 |
-| 正確性 | **ビジネス価値から除外** | Functional Correctnessに対応。上記と同様、一般的には重要な品質軸だが、本ガイドラインでは事業リスク側へ寄せる |
-| 根拠への忠実性 | **ビジネス価値から除外** | Faithfulnessに対応。入力・参照情報にない内容の生成は「誤情報・誤誘導」で評価するため |
-| 根拠への忠実性 | **ビジネス価値から除外** | Groundednessに対応。根拠との整合は「誤情報・誤誘導」で評価するため |
-| 安全性 | **除外** | Harmfulness / Violence / Self-harm等に対応。固定済み事業リスク「有害・危険コンテンツ」で評価 |
-| 安全性 | **除外** | Stereotyping / Hate / Unfairnessに対応。固定済み事業リスク「公平性・差別」で評価 |
-| 安全性 | **除外** | Privacy関連に対応。固定済み事業リスク「プライバシー・機密情報」で評価 |
+| スタイル・トーン | **採用 / 統合** | Professional Style and Tone / Text Quality等に対応。「表現品質」の下位観点として扱う |
+| 簡潔性・冗長性 | **採用 / 統合** | Conciseness / Verbosityに対応。「表現品質」の下位観点として扱う |
 | ユーザー満足 | **独立区分にはしない** | Customer Satisfactionに対応。複数の品質要因を包含する総合的な指標であり、区分2として横並びにすると包含関係が大きくなるため |
-| 堅牢性 | **スコープ外 / 別軸** | Robustnessに対応。1件の出力品質ではなく、条件変化に対して品質を維持できるかというテスト設計・モデル品質の論点 |
-| RAG検索品質 | **スコープ外** | Context Precision / Context Recallに対応。Retriever・RAG検索品質の評価。最終出力評価とは分離する |
 | 拒否の適切性 | **独立区分にはしない** | Refusalに対応。必要な回答を不当に拒否した場合は「目的・タスク適合」または「指示遵守」で評価可能。安全上の適切な拒否は事業リスク側の設計と合わせて判断する |
-| 効率性・コスト・レイテンシ | **スコープ外** | Efficiency / Cost / Latencyに対応。本検討では効率性を対象外としている |
+| 堅牢性 | **スコープ外 / 別軸** | Robustnessに対応。1件の出力品質ではなく、条件変化に対して品質を維持できるかというテスト設計・モデル品質の論点 |
+| RAG検索品質 | **スコープ外** | Context Precision / Context Recall / Contextual Relevancy等に対応。Retriever・RAG検索品質の評価として最終出力評価とは分離する |
+| 安全性 | **除外** | Harmfulness / Violence / Self-harm / Stereotyping / Hate / Unfairness / Privacy等に対応。固定済みの事業リスク側で評価する |
 
 ---
 
