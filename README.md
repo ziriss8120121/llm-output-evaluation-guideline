@@ -43,6 +43,7 @@ Python等によるLLM出力生成・評価の自動化など、**効率性を目
 - [事業リスク：区分2の選定根拠](docs/business-risk-category2-selection-rationale.md)
 - [事業リスク：評価を通して目指すべき状態](docs/business-risk-target-states.md)
 - [事業リスク：区分2の網羅性（MECE）検討](docs/business-risk-category2-coverage.md)
+- [ビジネス価値：区分2の選定根拠](docs/business-value-category2-selection-rationale.md)
 
 ## Templates
 
