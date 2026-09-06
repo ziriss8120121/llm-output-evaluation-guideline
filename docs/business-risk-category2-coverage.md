@@ -44,13 +44,20 @@ AIリスクに関する多数の既存分類・フレームワークを統合し
 
 代表的なドメインは以下。
 
-- Discrimination & Toxicity
-- Privacy & Security
-- Misinformation
-- Malicious Actors
-- Human-Computer Interaction
-- Socioeconomic & Environmental
-- AI System Safety, Failures & Limitations
+1. **Discrimination & Toxicity**
+    → **差別・有害性**
+2. **Privacy & Security**
+    → **プライバシー・セキュリティ**
+3. **Misinformation**
+    → **誤情報**
+4. **Malicious Actors**
+    → **悪意ある利用者・悪用**
+5. **Human-Computer Interaction**
+    → **人間とAIの相互作用**
+6. **Socioeconomic & Environmental**
+    → **社会・経済・環境への影響**
+7. **AI System Safety, Failures & Limitations**
+    → **AIシステムの安全性・障害・限界**
 
 この分類からは、事業リスクを単に「法令違反」「情報漏洩」などだけで捉えるのではなく、以下のような領域も考慮する必要があることが分かる。
 
