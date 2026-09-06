@@ -43,3 +43,13 @@ Python等によるLLM出力生成・評価の自動化など、**効率性を目
 - [事業リスク：区分2の選定根拠](docs/business-risk-category2-selection-rationale.md)
 - [事業リスク：評価を通して目指すべき状態](docs/business-risk-target-states.md)
 - [事業リスク：区分2の網羅性（MECE）検討](docs/business-risk-category2-coverage.md)
+
+## Templates
+
+現段階では、事業リスクのみを対象としたプロンプトUT用FMTを用意しています。
+
+1. [【FMT】Done定義_プロンプトUT](templates/【FMT】Done定義_プロンプトUT.md)
+2. [【FMT】観点シート_プロンプトUT](templates/【FMT】観点シート_プロンプトUT.md)
+3. [【FMT】項目シート_プロンプトUT](templates/【FMT】項目シート_プロンプトUT.md)
+
+3つのFMTは、`Done定義No → 観点No → 項目No` で前後工程を突合し、評価目的から評価項目・評価基準・合格基準までトレーサビリティを確保する前提で利用します。
