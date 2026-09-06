@@ -254,25 +254,27 @@ OpenAI Evals / Gradersは、すべてのユースケースに固定された品�
 
 文献を横断して整理すると、現段階では以下を区分2候補として検討する価値がある。
 
-| 区分2候補 | 主な内容 | 主な根拠 |
-|---|---|---|
-| 目的・タスク適合 | LLM機能固有の目的、期待するタスク・価値への適合 | ISO / Microsoft / AWS / DeepEval |
-| 完全性 | 必要な情報・要素・論点の不足がないこと | ISO / AWS / Microsoft |
-| 正確性 | 入力・参照情報・事実に対して正しいこと | ISO / AWS / Ragas |
-| 関連性 | 要求や目的に関係する内容へ焦点を当てること | AWS / Microsoft / DeepEval / Ragas |
-| 指示遵守 | 明示された条件・形式・制約への適合 | AWS / Google |
-| 根拠への忠実性 | 入力・参照コンテキストに忠実であること | AWS / Microsoft / DeepEval / Ragas |
-| 論理的一貫性 | 内容・論理の流れに矛盾や破綻がないこと | AWS / Microsoft / Google |
-| 自然さ・流暢性 | 文法・語彙・文章として自然であること | Microsoft / Google |
-| スタイル・トーン | 用途に適した文章スタイル・トーンであること | AWS / Google |
-| 簡潔性・冗長性 | 不要な繰り返しや過度な冗長さがないこと | Google等 |
-| ユーザー満足 | 利用者にとって総合的に満足できる出力であること | Microsoft |
-| 拒否の適切性 | 必要な回答を不当に拒否せず、安全上必要な場合に適切に拒否すること | AWS等 |
-| 堅牢性 | 条件変化に対して品質を維持できること | ISO/IEC 25059等 |
-| RAG検索品質 | 必要なコンテキストの取得・ランキング品質 | DeepEval / Ragas等 |
-| 安全性 | 有害性、差別、プライバシー等 | AWS / Microsoft等 |
+外部フレームワークごとに名称が異なる同義・類似概念は、この段階で同一の区分2候補に正規化・統合する。
 
-> NOTE: 上記は確定版ではない。次工程で、同義・類似概念の統合、固定済み「事業リスク」との重複排除、プロンプトUTのスコープ適合性、区分同士の重複・粒度を検証する。
+| 区分2候補 | 対応する主な外部概念 | 主な内容 | 主な根拠 |
+|---|---|---|---|
+| 目的・タスク適合 | Task Completion / Functional Appropriateness / Helpfulness | LLM機能固有の目的、期待するタスク・価値への適合 | ISO / Microsoft / AWS / DeepEval |
+| 完全性 | Completeness / Response Completeness / Functional Completeness | 必要な情報・要素・論点の不足がないこと | ISO / AWS / Microsoft |
+| 正確性 | Correctness / Accuracy / Functional Correctness / Answer Correctness | 入力・参照情報・事実に対して正しいこと | ISO / AWS / Ragas |
+| 関連性 | Relevance / Answer Relevancy / Response Relevancy | 要求や目的に関係する内容へ焦点を当てること | AWS / Microsoft / DeepEval / Ragas |
+| 指示遵守 | Following Instructions / Instruction Following | 明示された条件・形式・制約への適合 | AWS / Google |
+| 根拠への忠実性 | Faithfulness / Groundedness | 入力・参照コンテキストに忠実であること | AWS / Microsoft / DeepEval / Ragas |
+| 論理的一貫性 | Logical Coherence / Coherence | 内容・論理の流れに矛盾や破綻がないこと | AWS / Microsoft / Google |
+| 自然さ・流暢性 | Fluency | 文法・語彙・文章として自然であること | Microsoft / Google |
+| スタイル・トーン | Professional Style and Tone / Text Quality | 用途に適した文章スタイル・トーンであること | AWS / Google |
+| 簡潔性・冗長性 | Conciseness / Verbosity | 不要な繰り返しや過度な冗長さがないこと | Google等 |
+| ユーザー満足 | Customer Satisfaction | 利用者にとって総合的に満足できる出力であること | Microsoft |
+| 拒否の適切性 | Refusal | 必要な回答を不当に拒否せず、安全上必要な場合に適切に拒否すること | AWS等 |
+| 堅牢性 | Robustness | 条件変化に対して品質を維持できること | ISO/IEC 25059等 |
+| RAG検索品質 | Context Precision / Context Recall / Contextual Relevancy | 必要なコンテキストの取得・ランキング品質 | DeepEval / Ragas等 |
+| 安全性 | Harmfulness / Violence / Self-harm / Stereotyping / Hate / Unfairness / Privacy | 有害性、差別、プライバシー等 | AWS / Microsoft等 |
+
+> NOTE: 上記は、外部フレームワークの同義・類似概念を候補単位に正規化・統合した母集団であり、確定版ではない。次工程で、固定済み「事業リスク」との重複排除、プロンプトUTのスコープ適合性、候補同士の重複・粒度を検証する。
 
 ---
 
@@ -298,7 +300,7 @@ DeepEval / Ragas / OpenAI Evals
 
 その上で、以下を実施する。
 
-1. 同義・類似する評価軸を統合する
+1. 候補同士で意味・粒度が重なるものを統合する
 2. 上位概念と下位要因が同一階層に混在していないか確認する
 3. 固定済み「事業リスク」と重複するものをビジネス価値側から除外する
 4. 「プロンプトUTにおけるLLM出力評価」のスコープ外を除外する
