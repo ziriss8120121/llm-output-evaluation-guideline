@@ -54,7 +54,7 @@ Python等によるLLM出力生成・評価の自動化など、**効率性を目
 
 ## Templates
 
-現段階では、事業リスクのみを対象としたプロンプトUT用FMTを用意しています。
+事業リスク・ビジネス価値を対象としたプロンプトUT用FMTを用意しています。
 
 1. [【FMT】Done定義_プロンプトUT](templates/【FMT】Done定義_プロンプトUT.md)
 2. [【FMT】観点シート_プロンプトUT](templates/【FMT】観点シート_プロンプトUT.md)
