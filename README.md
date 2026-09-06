@@ -50,6 +50,7 @@ Python等によるLLM出力生成・評価の自動化など、**効率性を目
 
 1. [区分2の網羅性（MECE）検討](docs/business-value-category2-coverage.md)
 2. [区分2の選定根拠](docs/business-value-category2-selection-rationale.md)
+3. [評価を通して目指すべき状態](docs/business-value-target-states.md)
 
 ## Templates
 
