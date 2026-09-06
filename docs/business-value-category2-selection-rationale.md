@@ -28,7 +28,7 @@ LLM
 
 ## 2. 結論
 
-現時点では、ビジネス価値の区分2を以下の5区分とする。
+ビジネス価値の区分2は以下の5区分とする。
 
 1. **目的達成性**
 2. **完全性**
@@ -49,6 +49,8 @@ LLM
 
 である。
 
+MECE性の詳細検証は、[ビジネス価値：区分2の網羅性（MECE）検討](business-value-category2-coverage.md)を参照する。
+
 ---
 
 ## 3. 今回の評価スコープ
@@ -59,7 +61,7 @@ LLM機能が生成した**出力内容そのものから、機能の目的・要
 
 例えば以下を対象とする。
 
-- そのLLM機能で期待する目的を達成できる出力になっているか
+- そのLLM機能固有の目的・期待価値に適合した出力になっているか
 - 必要な情報・要素が不足なく含まれているか
 - 要求に関係する内容に適切に焦点を当てているか
 - プロンプトで指定した条件・形式・制約等を守っているか
@@ -132,17 +134,15 @@ LLM機能が生成した**出力内容そのものから、機能の目的・要
 
 ビジネス価値側では、これらと**同じ内容を二重に評価しない**ことを原則とする。
 
-判断基準は以下とする。
-
 | 問い | 配置先 |
 |---|---|
 | 出力による損失・不利益・誤認・権利侵害等を防げているか | **事業リスク** |
 | 出力が目的・要件・利用価値をどの程度満たしているか | **ビジネス価値** |
 | 両方に見える評価軸 | 原則どちらか一方に寄せ、二重評価しない |
 
-特に、一般的なLLM評価で頻出する **Correctness / Accuracy / Faithfulness / Groundedness** は、本来は出力品質として重要な指標である。
+特に、一般的なLLM評価で頻出する **Correctness / Accuracy / Faithfulness / Groundedness** は、本来は重要な出力品質指標である。
 
-しかし、本ガイドラインでは、入力・参照情報・確認可能な事実との不整合、根拠にない生成、利用者の誤認につながる出力は、固定済みの事業リスク「**誤情報・誤誘導**」で評価する。
+しかし、本ガイドラインでは、入力・参照情報・確認可能な事実との不整合、根拠にない生成、利用者の誤認につながる出力を、固定済みの事業リスク「**誤情報・誤誘導**」で評価する。
 
 そのため、これらは重要性が低いから除外するのではなく、**二重評価を避けるためビジネス価値側から意図的に除外する**。
 
@@ -154,11 +154,7 @@ LLM機能が生成した**出力内容そのものから、機能の目的・要
 
 [ISO/IEC 25010:2023 - Product quality model](https://www.iso.org/standard/78176.html)
 
-ICT・ソフトウェア製品の品質を、要求定義、テスト目的、品質管理基準、受入基準等に利用できる品質モデルとして整理している。
-
-本検討では、LLM固有の評価軸だけに依存せず、ソフトウェア品質として「期待する機能・目的に適合しているか」という上位概念を確認するために参照した。
-
-特に Functional Suitability に関係する考え方である、以下を候補整理の参考とした。
+特に Functional Suitability に関係する以下を候補整理の参考とした。
 
 - Functional Completeness
 - Functional Correctness
@@ -168,15 +164,13 @@ ICT・ソフトウェア製品の品質を、要求定義、テスト目的、�
 
 [ISO/IEC 25059:2023 - Quality model for AI systems](https://www.iso.org/obp/ui#iso:std:iso-iec:25059:ed-1:v1:en)
 
-AIシステム向けの品質モデルであり、Functional Correctness、Robustness、User Controllability等のAI固有・AIで重要度が増す品質概念を整理している。
-
-本検討では、AI品質としての抜け漏れ確認に用いる。
+Functional Correctness、Robustness等を含むAI品質モデルとして、抜け漏れ確認に利用した。
 
 ### 5.3 Amazon Bedrock Model Evaluation
 
 [Amazon Bedrock - Use metrics to understand model performance](https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-metrics.html)
 
-LLM-as-a-Judgeによる組み込み評価指標として、以下を提供している。
+主に以下を候補母集団として参照した。
 
 - Correctness
 - Completeness
@@ -190,13 +184,11 @@ LLM-as-a-Judgeによる組み込み評価指標として、以下を提供して
 - Stereotyping
 - Refusal
 
-本検討では、生成AIの出力品質に関する候補を広く抽出する主要な母集団として使用した。
-
 ### 5.4 Microsoft Foundry Evaluators
 
-[Microsoft Foundry - Run evaluations](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/evaluate-generative-ai-app)
+[Microsoft Foundry - Evaluate generative AI applications](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/evaluate-generative-ai-app)
 
-生成AI・AI Agent向けの品質評価として、以下を提供している。
+主に以下を確認した。
 
 - Customer Satisfaction
 - Task Completion
@@ -206,45 +198,27 @@ LLM-as-a-Judgeによる組み込み評価指標として、以下を提供して
 - Fluency
 - Relevance
 
-加えて、Violence、Self-harm、Hate/Unfairness等のSafety Evaluatorを品質評価とは分離している。
-
-本検討では、Task CompletionやResponse Completeness等の価値側候補と、安全性リスク側との切り分け確認に利用した。
+Safety Evaluatorが品質評価とは別に扱われていることも、事業リスクとの切り分け確認に利用した。
 
 ### 5.5 Google Vertex AI Evaluation
 
 [Google Cloud - View and interpret evaluation results](https://cloud.google.com/vertex-ai/generative-ai/docs/models/eval-python-sdk/view-evaluation)
 
-生成AI出力を評価する指標として、Coherence、Fluency、Instruction Following、Text Quality等を扱っている。
-
-本検討では、指示遵守や表現品質を独立した品質軸として扱う妥当性の確認に利用した。
+Coherence、Fluency、Instruction Following、Text Quality等を確認した。
 
 ### 5.6 DeepEval
 
 [DeepEval - Evaluation Metrics](https://deepeval.com/docs/metrics-introduction)
 
-LLMアプリケーション向けに、以下のような評価指標を提供している。
+Answer Relevancy、Faithfulness、Conversation Completeness、Contextual Relevancy等を確認した。
 
-- Task Completion
-- Answer Relevancy
-- Faithfulness
-- Conversation Completeness
-- Contextual Relevancy
-- Contextual Recall
-- Contextual Precision
-
-DeepEvalでは、汎用指標を過剰に並べるより、少数の汎用指標とユースケース固有指標を組み合わせる考え方も示されている。
-
-本検討では、区分2を過度に細分化せず、下位の「観点」で案件固有化する方針の参考とした。
+Task Completionについては「タスク達成」という品質概念のクロスチェックとして参照する。ただし、DeepEvalのTask Completion実装はAgentのtrace / trajectoryを前提とするため、本ガイドラインの単一プロンプトUTへ直接適用するものではない。
 
 ### 5.7 Ragas
 
 [Ragas - Response Relevancy](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/answer_relevance/)
 
-RAG評価を中心に、Response Relevancy、Faithfulness、Answer Correctness等を扱う。
-
-Response Relevancyでは、ユーザー入力に直接・適切に応答しているかを評価し、事実の正確性とは別に扱っている。
-
-本検討では、「関連性」と「正確性」を別概念として整理する際の参考とした。
+Response Relevancy、Faithfulness、Answer Correctness等を確認し、「関連性」と「正確性」を別概念として整理する際の参考とした。
 
 ### 5.8 OpenAI Evals / Graders
 
@@ -252,15 +226,11 @@ Response Relevancyでは、ユーザー入力に直接・適切に応答して�
 
 [OpenAI Graders](https://platform.openai.com/docs/api-reference/graders)
 
-OpenAI Evalsでは、すべてのユースケースに一律の品質分類を適用するのではなく、評価対象ごとに Testing Criteria を定義し、String Check、Text Similarity、Model Grader等を組み合わせて評価できる。
-
-本検討では、共通区分を上位に定義しつつ、案件固有の「観点」「評価項目」「評価基準」に落とす設計の参考とした。
+評価対象ごとにTesting CriteriaやRubricを定義する考え方を、共通区分から案件固有の観点・評価項目・評価基準へ展開する設計の参考とした。
 
 ---
 
 ## 6. 外部フレームワークからの候補抽出
-
-各フレームワークで登場する評価軸を、意味の近いものごとに正規化すると、主に以下の候補群となる。
 
 | 候補概念 | 代表的な外部表現 | 主な参照元 |
 |---|---|---|
@@ -292,27 +262,26 @@ OpenAI Evalsでは、すべてのユースケースに一律の品質分類を�
 
 | 候補 | 今回の扱い | 理由 / 対応先 |
 |---|---|---|
-| Task Completion | **採用 / 統合** | 「目的達成性」へ統合。LLM機能固有の目的を実現できたかを扱う |
-| Helpfulness | **採用 / 統合** | 「目的達成性」へ統合。単独区分にすると完全性・関連性・指示遵守等を包含しすぎるため |
-| Functional Appropriateness | **採用 / 統合** | 「目的達成性」の根拠として利用 |
-| Completeness / Response Completeness | **採用** | 「完全性」。必要な情報・要素が不足していないかを扱う |
-| Relevance / Answer Relevancy | **採用** | 「関連性」。要求と関係のない情報に逸れていないかを扱う |
-| Following Instructions / Instruction Following | **採用** | 「指示遵守」。プロンプトで指定した条件・形式・制約等を扱う |
+| Task Completion | **採用 / 統合** | 「目的達成性」へ統合。タスク達成という概念を参照する |
+| Helpfulness | **採用 / 統合** | 独立区分にすると完全性・関連性・指示遵守・表現品質等を包含しすぎるため、固有価値を「目的達成性」へ寄せる |
+| Functional Appropriateness | **採用 / 統合** | 「目的達成性」の主要な根拠として利用 |
+| Completeness / Response Completeness | **採用** | 「完全性」。必要な内容・情報・論点が不足していないかを扱う |
+| Relevance / Answer Relevancy | **採用** | 「関連性」。目的・要求と無関係な内容へ逸れていないかを扱う |
+| Following Instructions / Instruction Following | **採用** | 「指示遵守」。明示された形式・条件・制約等を扱う |
 | Logical Coherence / Coherence | **採用 / 統合** | 「表現品質」の下位観点として扱う |
 | Fluency | **採用 / 統合** | 「表現品質」の下位観点として扱う |
 | Professional Style and Tone | **採用 / 統合** | 「表現品質」の下位観点として扱う |
 | Conciseness / Verbosity | **採用 / 統合** | 「表現品質」の下位観点として扱う |
-| Correctness / Accuracy | **ビジネス価値から除外** | 固定済み事業リスク「誤情報・誤誘導」で評価するため。二重評価防止 |
-| Functional Correctness | **ビジネス価値から除外** | 上記と同様。一般的には重要な品質軸だが、本ガイドラインでは事業リスク側へ寄せる |
-| Faithfulness | **ビジネス価値から除外** | 入力・参照情報にない内容の生成は「誤情報・誤誘導」で評価するため |
-| Groundedness | **ビジネス価値から除外** | 根拠との整合は「誤情報・誤誘導」で評価するため |
+| Correctness / Accuracy | **ビジネス価値から除外** | 固定済み事業リスク「誤情報・誤誘導」で評価するため |
+| Functional Correctness | **ビジネス価値から除外** | 上記と同様 |
+| Faithfulness / Groundedness | **ビジネス価値から除外** | 入力・参照情報・根拠との不整合は「誤情報・誤誘導」で評価するため |
 | Harmfulness / Violence / Self-harm等 | **除外** | 固定済み事業リスク「有害・危険コンテンツ」で評価 |
 | Stereotyping / Hate / Unfairness | **除外** | 固定済み事業リスク「公平性・差別」で評価 |
 | Privacy関連 | **除外** | 固定済み事業リスク「プライバシー・機密情報」で評価 |
-| Customer Satisfaction | **スコープ外** | 実ユーザーの反応を必要とするため、本番・利用評価として扱う |
-| Robustness | **スコープ外 / 別軸** | 1件の出力品質ではなく、条件変化に対して品質を維持できるかというテスト設計・モデル品質の論点 |
+| Customer Satisfaction | **独立区分にはしない** | MicrosoftのEvaluatorは実ユーザーアンケートを必須とせず応答・会話から満足度を推定するが、目的達成性・関連性・表現品質等を包含するholisticな指標であり、共通区分2としては上位すぎるため |
+| Robustness | **スコープ外 / 別軸** | 条件変化に対して品質を維持できるかというテスト設計・モデル品質の論点 |
 | Context Precision / Context Recall | **スコープ外** | Retriever・RAG検索品質の評価。最終出力評価とは分離する |
-| Refusal | **独立区分にはしない** | 必要な回答を不当に拒否した場合は「目的達成性」または「指示遵守」で評価可能。安全上の適切な拒否は事業リスク側の設計と合わせて判断する |
+| Refusal | **独立区分にはしない** | 不当な拒否は目的達成性または指示遵守、安全上必要な拒否は事業リスク側との関係で判断する |
 | Efficiency / Cost / Latency | **スコープ外** | 本検討では効率性を対象外としている |
 
 ---
@@ -321,25 +290,25 @@ OpenAI Evalsでは、すべてのユースケースに一律の品質分類を�
 
 ### 8.1 目的達成性
 
-**そのLLM機能で期待する目的・価値を実現できる出力になっているか**を扱う。
+**他の共通品質区分では捉えきれない、そのLLM機能固有の目的・期待価値に適合した出力になっているか**を扱う。
 
-外部フレームワークの以下を主に統合する。
+主な根拠は以下である。
 
-- Task Completion
-- Helpfulness
 - Functional Appropriateness
+- Task Completionという品質概念
+- Helpfulnessのうちユースケース固有価値に関する部分
 
-この区分を設ける理由は、完全性・関連性・表現品質等だけでは、**その機能を何のために作ったのか**というユースケース固有の価値が評価から抜けるためである。
+目的達成性を総合品質として広く定義すると、完全性・関連性・指示遵守・表現品質を包含してしまうため、本ガイドラインでは**ユースケース固有価値に限定**する。
 
 例：
 
-- スカウト文面生成：候補者に求人の魅力を伝え、興味喚起につながる文面になっているか
-- 求人要約：ユーザーが求人の要点を短時間で把握できるか
+- スカウト文面生成：候補者に合わせた訴求になっているか、求人の魅力が伝わるか
+- 求人要約：原文を読まなくても求人の特徴を短時間で把握できるか
 - 検索条件生成：ユーザーの検索意図を検索条件として表現できているか
 
 ### 8.2 完全性
 
-**目的・要求を満たすために必要な情報・要素が不足なく含まれているか**を扱う。
+**目的・要求を満たすために必要な内容・情報・論点が不足なく含まれているか**を扱う。
 
 主な根拠は以下である。
 
@@ -348,6 +317,8 @@ OpenAI Evalsでは、すべてのユースケースに一律の品質分類を�
 - Functional Completeness
 
 「誤った情報があるか」は事業リスク「誤情報・誤誘導」で扱い、本区分では**必要なものが欠けていないか**に限定する。
+
+また、形式・文字数等の明示的な制約は「指示遵守」で扱う。
 
 ### 8.3 関連性
 
@@ -359,19 +330,22 @@ OpenAI Evalsでは、すべてのユースケースに一律の品質分類を�
 - Answer Relevancy
 - Response Relevancy
 
-完全性との境界は以下とする。
+境界は以下とする。
 
 ```text
 完全性
 → 必要なものが足りているか
 
 関連性
-→ 不要なものに逸れていないか
+→ 不要・無関係な内容に逸れていないか
+
+表現品質
+→ 関連する内容をどう表現しているか
 ```
 
 ### 8.4 指示遵守
 
-**プロンプトで明示された条件・形式・制約等を守った出力になっているか**を扱う。
+**プロンプトで明示された形式・条件・制約・出力方法等を守った出力になっているか**を扱う。
 
 主な根拠は以下である。
 
@@ -384,15 +358,14 @@ OpenAI Evalsでは、すべてのユースケースに一律の品質分類を�
 - 敬体で記載する
 - 指定フォーマットで出力する
 - 箇条書きを使用しない
-- 特定の要素を含める / 含めない
 
-内容自体が有用でも、業務要件として指定した制約を守れていなければ、期待する価値を満たしていないため独立区分とする。
+明示された条件への違反は「指示遵守」を優先し、明示されていないが用途上不適切な表現は「表現品質」で扱う。
 
 ### 8.5 表現品質
 
-**成果物として、用途に応じた論理性・自然さ・読みやすさ・簡潔さ・スタイル・トーン等を備えた出力になっているか**を扱う。
+**関連する内容を、成果物として論理的・自然・簡潔・読みやすく、用途に適したスタイル・トーンで表現できているか**を扱う。
 
-外部フレームワークでは以下のように細分化されている。
+外部フレームワークでは以下のように細分化される。
 
 - Logical Coherence / Coherence
 - Fluency
@@ -400,76 +373,51 @@ OpenAI Evalsでは、すべてのユースケースに一律の品質分類を�
 - Text Quality
 - Conciseness / Verbosity
 
-これらを区分2として個別に並べると粒度が細かくなりすぎるため、区分2では「表現品質」に統合し、案件ごとの「観点シート」で必要なものを選択・具体化する。
+これらは区分2では「表現品質」に統合し、案件ごとの観点シートで必要なものを選択・具体化する。
 
 ---
 
 ## 9. 区分2同士の境界
 
-区分2同士の重複を抑えるため、以下の問いで切り分ける。
+| 区分2 | 主な問い | 主に扱わないもの |
+|---|---|---|
+| **目的達成性** | 他の共通品質では捉えきれない、機能固有の目的・期待価値を実現できているか | 他4区分で評価できる一般品質 |
+| **完全性** | 必要な内容・情報・論点が不足していないか | 情報の正誤、形式・文字数等の制約 |
+| **関連性** | 目的・要求と関係する内容に焦点を当てているか | 文章そのものの読みやすさ・自然さ |
+| **指示遵守** | 明示された形式・条件・制約を守っているか | 明示されていない暗黙的な文章品質 |
+| **表現品質** | 関連する内容を論理的・自然・簡潔・用途に適した形で表現できているか | 明示的な指示違反、内容の誤り |
 
-| 区分2 | 主な問い |
-|---|---|
-| **目的達成性** | そもそも、このLLM機能でやりたいことを実現できる出力か |
-| **完全性** | 必要な情報・要素が不足していないか |
-| **関連性** | 目的・要求に関係する内容に焦点を当てているか |
-| **指示遵守** | 明示された条件・形式・制約を守っているか |
-| **表現品質** | 成果物として論理的・自然・読みやすく、用途に適した表現か |
+二重評価を防ぐため、案件での観点設計では以下を共通ルールとする。
 
-なお、区分2は評価項目そのものではない。
-
-案件では、対象と判断したDone定義から「観点」を作成し、その後「評価項目」「評価基準」「合格基準」へ展開する。
-
-```text
-Done定義
-  ↓
-観点
-  ↓
-評価項目
-  ↓
-評価基準
-  ↓
-合格基準
-```
+> **同一の問題を複数区分で二重評価しない。複数区分に該当し得る場合は、その問題を最も直接的・具体的に表す区分へ寄せる。**
 
 ---
 
-## 10. 採用しなかった評価軸に関する重要な補足
+## 10. 採用しなかった評価軸に関する補足
 
-### 10.1 Correctnessを採用しない理由
+### 10.1 Correctness / Accuracy
 
-Correctness / Accuracyは、ISO、AWS、Ragas等で広く利用される重要な品質軸である。
+Correctness / Accuracyは重要な品質軸だが、本ガイドラインでは、入力情報と異なる内容、参照情報との矛盾、利用者が誤認する内容等を事業リスク「誤情報・誤誘導」で評価する。
 
-しかし、本ガイドラインでは、例えば以下をすでに事業リスク「誤情報・誤誘導」で評価する。
+そのため、一般的な品質論として正確性を否定するものではなく、**本ガイドライン固有の役割分担として事業リスク側に寄せる**。
 
-- 求人票に存在しない年収を事実として生成する
-- 入力情報と異なる勤務地を生成する
-- 参照情報と矛盾する内容を生成する
-- 利用者が誤認するような内容を生成する
+### 10.2 Faithfulness / Groundedness
 
-これをビジネス価値の「正確性」として再度評価すると、同一出力に対する評価が二重化する。
+入力・参照情報に存在しない内容、参照情報との矛盾、根拠がない内容を事実として提示するケースは、事業リスク「誤情報・誤誘導」で扱う。
 
-そのため、**一般的な品質論として正確性を否定するものではなく、本ガイドライン固有の役割分担として事業リスク側に寄せる**。
+よって二重評価防止のため、ビジネス価値側の区分2には置かない。
 
-### 10.2 Faithfulness / Groundednessを採用しない理由
+### 10.3 Helpfulness
 
-Faithfulness / GroundednessもRAGや参照情報を利用するLLMでは重要である。
+Helpfulnessは「役に立つか」という包括的な概念であり、完全性、関連性、指示遵守、表現品質等を包含し得る。
 
-しかし、以下は事業リスク「誤情報・誤誘導」で扱える。
+そのため独立区分にはせず、ユースケース固有価値に関する部分を「目的達成性」へ統合し、一般品質は他区分で扱う。
 
-- 入力・参照情報に存在しない内容を生成する
-- 参照情報と矛盾する主張を生成する
-- 根拠がない内容を事実として提示する
+### 10.4 Customer Satisfaction
 
-よって、二重評価防止のためビジネス価値側の区分2には置かない。
+Customer Satisfactionは利用者が感じる総合成果を捉えるholisticな概念である。Microsoft FoundryのEvaluatorは実ユーザーアンケートを必須とせず、応答・会話から満足度を推定する。
 
-### 10.3 Helpfulnessを独立区分にしない理由
-
-Helpfulnessは「役に立つか」という意味で重要だが、AWSの定義でも指示遵守、一貫性、暗黙的なニーズへの対応等、複数の要素を包含する。
-
-そのため、「完全性」「関連性」「指示遵守」「表現品質」と横並びにすると包含関係が大きくなる。
-
-本ガイドラインでは、Helpfulnessの上位的な意味を「目的達成性」に統合し、具体的な品質要因は他区分・下位観点で扱う。
+一方、目的達成性、関連性、表現品質等と包含関係が大きく、共通区分2としては粒度が上位すぎるため独立区分にはしない。
 
 ---
 
@@ -506,7 +454,7 @@ Helpfulnessは「役に立つか」という意味で重要だが、AWSの定義
 - Amazon Bedrock, Use metrics to understand model performance  
   https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-metrics.html
 
-- Microsoft Foundry, Run evaluations from the Microsoft Foundry portal  
+- Microsoft Foundry, Evaluate generative AI applications  
   https://learn.microsoft.com/en-us/azure/ai-studio/how-to/evaluate-generative-ai-app
 
 - Google Cloud, View and interpret evaluation results  
@@ -515,8 +463,8 @@ Helpfulnessは「役に立つか」という意味で重要だが、AWSの定義
 - DeepEval, Introduction to LLM Evaluation Metrics  
   https://deepeval.com/docs/metrics-introduction
 
-- DeepEval, Answer Relevancy  
-  https://deepeval.com/docs/metrics-answer-relevancy
+- DeepEval, Task Completion  
+  https://deepeval.com/docs/metrics-task-completion
 
 - Ragas, Response Relevancy  
   https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/answer_relevance/
