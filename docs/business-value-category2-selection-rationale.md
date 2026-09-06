@@ -155,23 +155,25 @@ LLM機能が生成した**出力内容そのものから、機能の目的・要
 
 前段の網羅性検討では、主要な外部フレームワークを横断し、以下を区分2候補として洗い出した。
 
-| 区分2候補 | 主な内容 | 主な根拠 |
-|---|---|---|
-| 目的・タスク適合 | LLM機能固有の目的、期待するタスク・価値への適合 | ISO / Microsoft / AWS / DeepEval |
-| 完全性 | 必要な情報・要素・論点の不足がないこと | ISO / AWS / Microsoft |
-| 正確性 | 入力・参照情報・事実に対して正しいこと | ISO / AWS / Ragas |
-| 関連性 | 要求や目的に関係する内容へ焦点を当てること | AWS / Microsoft / DeepEval / Ragas |
-| 指示遵守 | 明示された条件・形式・制約への適合 | AWS / Google |
-| 根拠への忠実性 | 入力・参照コンテキストに忠実であること | AWS / Microsoft / DeepEval / Ragas |
-| 論理的一貫性 | 内容・論理の流れに矛盾や破綻がないこと | AWS / Microsoft / Google |
-| 自然さ・流暢性 | 文法・語彙・文章として自然であること | Microsoft / Google |
-| スタイル・トーン | 用途に適した文章スタイル・トーンであること | AWS / Google |
-| 簡潔性・冗長性 | 不要な繰り返しや過度な冗長さがないこと | Google等 |
-| ユーザー満足 | 利用者にとって総合的に満足できる出力であること | Microsoft |
-| 拒否の適切性 | 必要な回答を不当に拒否せず、安全上必要な場合に適切に拒否すること | AWS等 |
-| 堅牢性 | 条件変化に対して品質を維持できること | ISO/IEC 25059等 |
-| RAG検索品質 | 必要なコンテキストの取得・ランキング品質 | DeepEval / Ragas等 |
-| 安全性 | 有害性、差別、プライバシー等 | AWS / Microsoft等 |
+外部フレームワークごとに名称が異なる同義・類似概念は、この段階で同一の区分2候補に正規化・統合している。
+
+| 区分2候補 | 対応する主な外部概念 | 主な内容 | 主な根拠 |
+|---|---|---|---|
+| 目的・タスク適合 | Task Completion / Functional Appropriateness / Helpfulness | LLM機能固有の目的、期待するタスク・価値への適合 | ISO / Microsoft / AWS / DeepEval |
+| 完全性 | Completeness / Response Completeness / Functional Completeness | 必要な情報・要素・論点の不足がないこと | ISO / AWS / Microsoft |
+| 正確性 | Correctness / Accuracy / Functional Correctness / Answer Correctness | 入力・参照情報・事実に対して正しいこと | ISO / AWS / Ragas |
+| 関連性 | Relevance / Answer Relevancy / Response Relevancy | 要求や目的に関係する内容へ焦点を当てること | AWS / Microsoft / DeepEval / Ragas |
+| 指示遵守 | Following Instructions / Instruction Following | 明示された条件・形式・制約への適合 | AWS / Google |
+| 根拠への忠実性 | Faithfulness / Groundedness | 入力・参照コンテキストに忠実であること | AWS / Microsoft / DeepEval / Ragas |
+| 論理的一貫性 | Logical Coherence / Coherence | 内容・論理の流れに矛盾や破綻がないこと | AWS / Microsoft / Google |
+| 自然さ・流暢性 | Fluency | 文法・語彙・文章として自然であること | Microsoft / Google |
+| スタイル・トーン | Professional Style and Tone / Text Quality | 用途に適した文章スタイル・トーンであること | AWS / Google |
+| 簡潔性・冗長性 | Conciseness / Verbosity | 不要な繰り返しや過度な冗長さがないこと | Google等 |
+| ユーザー満足 | Customer Satisfaction | 利用者にとって総合的に満足できる出力であること | Microsoft |
+| 拒否の適切性 | Refusal | 必要な回答を不当に拒否せず、安全上必要な場合に適切に拒否すること | AWS等 |
+| 堅牢性 | Robustness | 条件変化に対して品質を維持できること | ISO/IEC 25059等 |
+| RAG検索品質 | Context Precision / Context Recall / Contextual Relevancy | 必要なコンテキストの取得・ランキング品質 | DeepEval / Ragas等 |
+| 安全性 | Harmfulness / Violence / Self-harm / Stereotyping / Hate / Unfairness / Privacy | 有害性、差別、プライバシー等 | AWS / Microsoft等 |
 
 この候補母集団に対して、次節で採用・統合・除外を判断する。
 
@@ -188,21 +190,21 @@ LLM機能が生成した**出力内容そのものから、機能の目的・要
 
 | 候補 | 今回の扱い | 理由 / 対応先 |
 |---|---|---|
-| 目的・タスク適合 | **採用 / 統合** | Task Completion / Functional Appropriateness / Helpfulnessを統合。LLM機能固有の目的・期待価値への適合を扱う |
-| 完全性 | **採用** | Completeness / Response Completeness / Functional Completenessに対応。必要な情報・要素・論点が不足していないかを扱う |
-| 正確性 | **ビジネス価値から除外** | Correctness / Accuracy / Functional Correctnessに対応。固定済み事業リスク「誤情報・誤誘導」で評価するため。二重評価防止 |
-| 関連性 | **採用** | Relevance / Answer Relevancy / Response Relevancyに対応。要求と関係のない情報に逸れていないかを扱う |
-| 指示遵守 | **採用** | Following Instructions / Instruction Followingに対応。プロンプトで明示した条件・形式・制約等を扱う |
-| 根拠への忠実性 | **ビジネス価値から除外** | Faithfulness / Groundednessに対応。入力・参照情報にない内容や根拠との不整合は「誤情報・誤誘導」で評価するため |
-| 論理的一貫性 | **採用 / 統合** | Logical Coherence / Coherenceに対応。「表現品質」の下位観点として扱う |
-| 自然さ・流暢性 | **採用 / 統合** | Fluencyに対応。「表現品質」の下位観点として扱う |
-| スタイル・トーン | **採用 / 統合** | Professional Style and Tone / Text Quality等に対応。「表現品質」の下位観点として扱う |
-| 簡潔性・冗長性 | **採用 / 統合** | Conciseness / Verbosityに対応。「表現品質」の下位観点として扱う |
-| ユーザー満足 | **独立区分にはしない** | Customer Satisfactionに対応。複数の品質要因を包含する総合的な指標であり、区分2として横並びにすると包含関係が大きくなるため |
-| 拒否の適切性 | **独立区分にはしない** | Refusalに対応。必要な回答を不当に拒否した場合は「目的・タスク適合」または「指示遵守」で評価可能。安全上の適切な拒否は事業リスク側の設計と合わせて判断する |
-| 堅牢性 | **スコープ外 / 別軸** | Robustnessに対応。1件の出力品質ではなく、条件変化に対して品質を維持できるかというテスト設計・モデル品質の論点 |
-| RAG検索品質 | **スコープ外** | Context Precision / Context Recall / Contextual Relevancy等に対応。Retriever・RAG検索品質の評価として最終出力評価とは分離する |
-| 安全性 | **除外** | Harmfulness / Violence / Self-harm / Stereotyping / Hate / Unfairness / Privacy等に対応。固定済みの事業リスク側で評価する |
+| 目的・タスク適合 | **採用** | LLM機能固有の目的・期待価値への適合を扱うため |
+| 完全性 | **採用** | 必要な情報・要素・論点が不足していないかを扱うため |
+| 正確性 | **ビジネス価値から除外** | 固定済み事業リスク「誤情報・誤誘導」で評価するため。二重評価防止 |
+| 関連性 | **採用** | 要求と関係のない情報に逸れていないかを扱うため |
+| 指示遵守 | **採用** | プロンプトで明示した条件・形式・制約等を扱うため |
+| 根拠への忠実性 | **ビジネス価値から除外** | 入力・参照情報にない内容や根拠との不整合は「誤情報・誤誘導」で評価するため |
+| 論理的一貫性 | **採用 / 統合** | 「表現品質」の下位観点として扱う |
+| 自然さ・流暢性 | **採用 / 統合** | 「表現品質」の下位観点として扱う |
+| スタイル・トーン | **採用 / 統合** | 「表現品質」の下位観点として扱う |
+| 簡潔性・冗長性 | **採用 / 統合** | 「表現品質」の下位観点として扱う |
+| ユーザー満足 | **独立区分にはしない** | 複数の品質要因を包含する総合的な指標であり、区分2として横並びにすると包含関係が大きくなるため |
+| 拒否の適切性 | **独立区分にはしない** | 必要な回答を不当に拒否した場合は「目的・タスク適合」または「指示遵守」で評価可能。安全上の適切な拒否は事業リスク側の設計と合わせて判断する |
+| 堅牢性 | **スコープ外 / 別軸** | 1件の出力品質ではなく、条件変化に対して品質を維持できるかというテスト設計・モデル品質の論点 |
+| RAG検索品質 | **スコープ外** | Retriever・RAG検索品質の評価として最終出力評価とは分離する |
+| 安全性 | **除外** | 固定済みの事業リスク側で評価する |
 
 ---
 
@@ -369,7 +371,7 @@ Helpfulnessは「役に立つか」という意味で重要だが、指示遵守
 
 そのため、「完全性」「関連性」「指示遵守」「表現品質」と横並びにすると包含関係が大きくなる。
 
-本ガイドラインでは、Helpfulnessの上位的な意味を「目的・タスク適合」に統合し、具体的な品質要因は他区分・下位観点で扱う。
+候補母集団を作成する段階で、Helpfulnessの上位的な意味は「目的・タスク適合」に正規化しており、具体的な品質要因は他区分・下位観点で扱う。
 
 ### 9.4 Customer Satisfactionを独立区分にしない理由
 
